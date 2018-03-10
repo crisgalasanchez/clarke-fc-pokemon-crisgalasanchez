@@ -25,7 +25,7 @@ class Pokedex extends React.Component{
 		return (
 			<ul className="listTypes">{
 				types.map(
-					type => <li>{type.type.name}
+					type => <li className="type">{type.type.name}
 						</li>
 					)
 			}
@@ -38,7 +38,7 @@ class Pokedex extends React.Component{
     let id = "";
     let sprite = "";
     let types = [];
-    if(info != undefined){
+    if(info !== undefined){
       name = info.name;
       id = info.id;
       sprite = info.sprites.front_default;

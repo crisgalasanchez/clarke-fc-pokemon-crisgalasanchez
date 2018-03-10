@@ -17,7 +17,6 @@ class App extends Component{
 	}
 
 	componentDidMount() {
-		let pokemonsList = [];
 		fetch('https://pokeapi.co/api/v2/pokemon/?limit=25')
 			.then(response => response.json())
 			.then(json => {
@@ -32,18 +31,19 @@ class App extends Component{
 			<ul className="listNames">{
 				pokemonsToShow.map(
 					pokemon => <li className="type--name">
-						<Pokedex name={pokemon.name}
-					 						url={pokemon.url}/>
-						</li>
+												<Pokedex name={pokemon.name}
+					 												url={pokemon.url}/>
+										</li>
 					)
 			}
 			</ul>);
  	}
 
  	cardChange(event){
-	 	this.state.pokemonsFiltered = this.state.pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(event.target.value.toLowerCase()));
+	 	let filteredPokemons = this.state.pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(event.target.value.toLowerCase()));
 		this.setState({
-      filtered : true
+			filtered : true,
+			pokemonsFiltered: filteredPokemons
     });
  	}
 

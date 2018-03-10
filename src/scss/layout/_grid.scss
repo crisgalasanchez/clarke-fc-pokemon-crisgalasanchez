@@ -15,11 +15,11 @@
   border-radius: 80%;
 }
 .image--box {
-  background-color: #f4f2cd;
+  background-color: #ffff;
   border-radius: 14px 14px 0px 0px;
 }
 .info {
-  background-color: #fcfbefab;
+  background-color: #de4141;
   border-radius: 0px 0px 13px 13px;
   padding: 15px 0px;
 }
@@ -34,7 +34,11 @@
   font-family: 'Lobster',  serif;
   font-size: 25px;
 }
-.type--name {
+.type {
   font-family: 'Lobster',  serif;
   font-size: 15px;
+  border: 2px solid #474742;
+  background-color: #fff7a3;
+  padding: 2px;
+  border-radius: 6px;
 }
