@@ -1,0 +1,45 @@
+@import url("https://fonts.googleapis.com/css?family=Lobster");
+body{
+  margin: 0px;
+}
+h2{
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.app{
+  display: block;
+  position: relative;
+}
+.app::after {
+  content: "";
+  background: url(../images/pokemon_640x960_039.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  opacity: 0.4;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+}
+.title {
+  font-family: 'Lobster',  serif;
+  font-size: 50px;
+  text-align: center;
+  padding: 30px;
+  color: #474742;
+  font-weight: 400;
+  margin: 0 0 25px;
+  overflow: hidden;
+}
+
+.listNames {
+  list-style: none;
+  padding-left: 0;
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  align-items: center;
+  padding: 20px;
+}

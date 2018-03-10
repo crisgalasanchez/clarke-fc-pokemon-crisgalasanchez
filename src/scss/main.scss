@@ -1,13 +1,3 @@
-// Core
-@import 'core/variables';
-
-// Layout
-@import 'layout/header';
-@import 'layout/footer';
-@import 'layout/grid';
-
-// Components
-@import 'components/input';
-
-// Pages
-@import 'pages/home';
+@import "components/input";
+@import "layout/grid";
+@import "pages/home";
