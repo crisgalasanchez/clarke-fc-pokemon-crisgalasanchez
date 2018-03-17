@@ -1,63 +1,60 @@
 import React from 'react';
+import Pokecard from './Pokecard';
 
 class Pokedex extends React.Component{
   constructor(props){
 		super(props);
 
-    this.paintTypes= this.paintTypes.bind(this);
+    this.cardChange = this.cardChange.bind(this);
+		this.paintPokemon = this.paintPokemon.bind(this);
 
 		this.state = {
+			pokemonsFiltered:[],
+			filtered: false
 		}
 	}
 
-  componentDidMount() {
-		let url = this.props.url;
-		fetch(url)
-			.then(response => response.json())
-			.then(json => {
-				this.setState({
-						pokemonInfo: json
-				});
-			});
-	}
-
-  paintTypes(types) {
+	paintPokemon(pokemonsToShow) {
 		return (
-			<ul className="listTypes">{
-				types.map(
-					type => <li className="type">{type.type.name}
-						</li>
+			<ul className="listNames">{
+				pokemonsToShow.map(
+					pokemon => <li className="type--name">
+												<Pokecard name={pokemon.name}
+					 												url={pokemon.url}/>
+										</li>
 					)
 			}
 			</ul>);
  	}
 
-  render() {
-    let info = this.state.pokemonInfo;
-    let name = "";
-    let id = "";
-    let sprite = "";
-    let types = [];
-    if(info !== undefined){
-      name = info.name;
-      id = info.id;
-      sprite = info.sprites.front_default;
-      types = info.types;
+ 	cardChange(event){
+	 	let filteredPokemons = this.props.list.filter(pokemon => pokemon.name.toLowerCase().includes(event.target.value.toLowerCase()));
+		this.setState({
+			filtered : true,
+			pokemonsFiltered: filteredPokemons
+    });
+ 	}
+
+  render(){
+    let pokemonsToShow = [];
+    if( this.props.list != undefined ){
+      pokemonsToShow= this.props.list;
     }
-    return (
-        <div className="card">
-          <div className="image--box">
-            <img className="image" src={ sprite } alt=""/>
-            <h2 className="id">{ id }</h2>
-          </div>
-          <div className="info">
-            <h2 className="name">{ name }</h2>
-            {this.paintTypes(types)}
+		if(this.state.filtered){
+			pokemonsToShow = this.state.pokemonsFiltered;
+		}
+
+		return(
+      <div>
+        <div>
+          <div className='box'>
+            <input placeholder= "Filtra pokemon por nombre" className='inbox' type="text"
+            onChange={this.cardChange} />
           </div>
         </div>
-    );
-  }
+        { this.paintPokemon(pokemonsToShow) }
+      </div>
+		)
+	}
 }
-
-
 export default Pokedex;

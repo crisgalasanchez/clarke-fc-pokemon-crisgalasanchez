@@ -1,13 +1,33 @@
-.listTypes{
+.listTypes {
   list-style: none;
   display: flex;
   justify-content: space-around;
   width: 150px;
 }
-.card {
+.listabilities {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+.ability {
+  font-family: 'Lobster',  serif;
+  font-size: 15px;
+  border: 2px solid #474742;
+  background-color: #fff7a3;
+  padding: 2px;
+  border-radius: 6px;
+  width: 150px;
+  margin: auto;
+}
+.card  {
+  text-decoration:none;
   border: 3px solid #474742;
   border-radius: 16px;
-  text-align: center;
+  text-align: center
+}
+.card--details {
+  margin-left: 80px;
+  margin-right: 80px;
 }
 .image {
   width: 150px;

@@ -1,23 +1,19 @@
 import React, { Component } from 'react';
 import Pokedex from './Pokedex';
-
+import About from './About';
+import { Route, Switch } from 'react-router-dom';
 
 class App extends Component{
 	constructor(props){
 		super(props);
 
-		this.cardChange = this.cardChange.bind(this);
-		this.paintPokemon = this.paintPokemon.bind(this);
-
 		this.state = {
-	    pokemons: [],
-			pokemonsFiltered:[],
-			filtered: false
+	    pokemons: []
 		}
 	}
 
-	componentDidMount() {
-		fetch('https://pokeapi.co/api/v2/pokemon/?limit=25')
+	componentWillMount() {
+		fetch('https://pokeapi.co/api/v2/pokemon/?limit=5')
 			.then(response => response.json())
 			.then(json => {
 				this.setState({
@@ -26,41 +22,20 @@ class App extends Component{
 			});
 	}
 
-	paintPokemon(pokemonsToShow) {
-		return (
-			<ul className="listNames">{
-				pokemonsToShow.map(
-					pokemon => <li className="type--name">
-												<Pokedex name={pokemon.name}
-					 												url={pokemon.url}/>
-										</li>
-					)
-			}
-			</ul>);
- 	}
-
- 	cardChange(event){
-	 	let filteredPokemons = this.state.pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(event.target.value.toLowerCase()));
+	handler() {
 		this.setState({
-			filtered : true,
-			pokemonsFiltered: filteredPokemons
-    });
- 	}
+		   messageShown: true
+		});
+	}
 
 	render(){
-		let pokemonsToShow= this.state.pokemons;
-		if(this.state.filtered){
-			pokemonsToShow = this.state.pokemonsFiltered;
-		}
-
 		return(
 			<div className='app'>
 				<h1 className='title' >Pokemon</h1>
-				<div className='box'>
-					<input placeholder= "Filtra pokemon por nombre" className='inbox' type="text"
-				 	onChange={this.cardChange} />
-				</div>
-				{this.paintPokemon(pokemonsToShow)}
+				<Switch>
+					<Route exact path='/' render={ () => <Pokedex list={this.state.pokemons}/> }/>
+					<Route path='/about/' component={ About } />
+				</Switch>
 			</div>
 		)
 	}
