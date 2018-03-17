@@ -70,6 +70,11 @@
   font-family: 'Lobster',  serif;
   font-size: 25px; }
 
+.evolution {
+  text-decoration: none;
+  font-family: serif;
+  font-size: 18px; }
+
 .type {
   font-family: 'Lobster',  serif;
   font-size: 15px;

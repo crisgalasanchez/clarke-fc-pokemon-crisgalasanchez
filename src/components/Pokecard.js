@@ -13,14 +13,21 @@ class Pokecard extends React.Component{
 
   componentDidMount() {
 		let url = this.props.url;
+
 		fetch(url)
 			.then(response => response.json())
-			.then(json => {
-				this.setState({
-						pokemonInfo: json
-				});
-			});
-	}
+      .then(pokemonDetails => {
+        fetch(pokemonDetails.species.url)
+        .then(response => response.json())
+        .then((evolution)=> {
+
+          this.setState({
+            pokemonInfo: pokemonDetails,
+            evolutions:evolution.evolves_from_species
+          });
+        });
+      })
+    }
 
   paintTypes(types) {
 		return (
@@ -35,15 +42,20 @@ class Pokecard extends React.Component{
 
   render() {
     let info = this.state.pokemonInfo;
+    let pokevolution = this.state.evolutions;
     let name = "";
     let id = "";
     let sprite = "";
+    let envolve = "";
     let types = [];
     if(info !== undefined){
       name = info.name;
       id = info.id;
       sprite = info.sprites.front_default;
       types = info.types;
+    }
+    if(pokevolution !== undefined && pokevolution !== null){
+      envolve = pokevolution.name;
     }
     return (
 
@@ -55,6 +67,7 @@ class Pokecard extends React.Component{
             </div>
             <div className="info">
               <h2 className="name">{ name }</h2>
+              <h3 className="evolution">Evoluciona de: { envolve }</h3>
               {this.paintTypes(types)}
             </div>
           </div>

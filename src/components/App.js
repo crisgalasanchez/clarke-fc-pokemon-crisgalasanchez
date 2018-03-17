@@ -13,7 +13,7 @@ class App extends Component{
 	}
 
 	componentWillMount() {
-		fetch('https://pokeapi.co/api/v2/pokemon/?limit=5')
+		fetch('https://pokeapi.co/api/v2/pokemon/?limit=25')
 			.then(response => response.json())
 			.then(json => {
 				this.setState({
